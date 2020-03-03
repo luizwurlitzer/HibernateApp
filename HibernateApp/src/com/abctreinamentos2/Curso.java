@@ -8,6 +8,10 @@ package com.abctreinamentos2;
  */
 public class Curso implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long cdCurso;
 	private String nome;
 	private long valor;
@@ -53,6 +57,11 @@ public class Curso implements java.io.Serializable {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	@Override
+	public String toString() {
+		return "Curso [descricao="+ nome+" valor="+valor+" codigo="+cdCurso+" url="+url+"]";
 	}
 
 }

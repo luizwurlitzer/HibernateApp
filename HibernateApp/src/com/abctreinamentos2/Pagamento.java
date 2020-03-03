@@ -6,6 +6,10 @@ package com.abctreinamentos2;
  */
 public class Pagamento implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private PagamentoId id;
 	private String dtInscricao;
 
@@ -33,4 +37,8 @@ public class Pagamento implements java.io.Serializable {
 		this.dtInscricao = dtInscricao;
 	}
 
+	@Override
+	public String toString() {
+		return "Pagamento [Codigo="+id.getCdCurso()+"CPF="+id.getCpf()+" Data Inscrição="+dtInscricao+"]";
+	}
 }

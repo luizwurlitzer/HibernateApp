@@ -7,6 +7,10 @@ package com.abctreinamentos2;
  */
 public class Cliente implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long cpf;
 	private String nome;
 	private String email;
@@ -49,6 +53,11 @@ public class Cliente implements java.io.Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	@Override
+	public String toString() {
+		return "Cliente [cpf="+cpf+"nome="+nome+" email="+email+"]";
 	}
 
 }

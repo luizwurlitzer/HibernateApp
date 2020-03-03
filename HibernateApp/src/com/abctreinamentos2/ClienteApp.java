@@ -1,16 +1,15 @@
-package com.abctreinamentos;
+package com.abctreinamentos2;
 
 import java.util.Scanner;
 
-public class CursoApp {
-
+public class ClienteApp {
 	public static void main(String[] args) {
 		try {
 		
 			Scanner entrada = new Scanner(System.in);
 			int opcao = 0;
 			long codigo;
-			String descricao;
+			String descricao,url;
 			long valor;
 			CursoDAO dao = new CursoDAO();
 			
@@ -35,7 +34,7 @@ public class CursoApp {
 					System.out.println("Consultar um curso especifico");
 					System.out.println("Digite o codigo: ");
 					codigo = entrada.nextLong();
-					System.out.println(dao.find(codigo));
+					System.out.println(dao.findById(codigo));
 					break;
 				case 3:
 					System.out.println("Cadastrar um novo curso");
@@ -44,28 +43,32 @@ public class CursoApp {
 					entrada.nextLine();
 					System.out.println("Digite a descrição: ");
 					descricao = entrada.nextLine();
+					System.out.println("Digite a url: ");
+					url = entrada.nextLine();
 					System.out.println("Digite o valor: ");
 					valor = entrada.nextLong();
-					Curso curso = new Curso(descricao, codigo, valor);
+					Curso curso = new Curso(codigo,descricao,valor, url);
 					dao.persist(curso);
 					break;
 				case 4:
-					System.out.println("Cadastrar um novo curso");
+					System.out.println("atualizar");
 					System.out.println("Digite o codigo: ");
 					codigo = entrada.nextLong();
 					entrada.nextLine();
 					System.out.println("Digite a descrição: ");
 					descricao = entrada.nextLine();
+					System.out.println("Digite a url: ");
+					url = entrada.nextLine();
 					System.out.println("Digite o valor: ");
 					valor = entrada.nextLong();
-					Curso curso1 = new Curso(descricao, codigo, valor);
-					dao.persist(curso1);
+					Curso curso1 = new Curso(codigo,descricao,valor, url);
+					dao.merge(curso1);
 					break;
 				case 5:
 					System.out.println("Excluir um curso");
 					System.out.println("Digite o codigo: ");
 					codigo = entrada.nextLong();
-					Curso curso2 = dao.find(codigo);
+					Curso curso2 = dao.findById(codigo);
 					dao.delete(curso2);
 					break;
 				case 6://sair
@@ -80,6 +83,5 @@ public class CursoApp {
 				e.printStackTrace();
 			}
 
-	}
-
+}
 }
