@@ -19,6 +19,8 @@ public class Cliente implements java.io.Serializable {
 		this.nome = nome;
 	}
 
+	
+	
 	public Cliente(long cpf, String nome, String email) {
 		this.cpf = cpf;
 		this.nome = nome;
