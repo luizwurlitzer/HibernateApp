@@ -39,6 +39,6 @@ public class Pagamento implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Pagamento [Codigo="+id.getCdCurso()+"CPF="+id.getCpf()+" Data Inscrição="+dtInscricao+"]";
+		return "Pagamento [Codigo="+id.getCdCurso()+" / CPF="+id.getCpf()+" / Data Inscrição="+dtInscricao+"]";
 	}
 }

@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 /**
  * Home object for domain model class Pagamento.
@@ -46,7 +47,7 @@ public class PagamentoDAO {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
-			session.persist(persistentInstance);
+			session.delete(persistentInstance);
 			session.getTransaction().commit();
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
@@ -60,7 +61,7 @@ public class PagamentoDAO {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
-			session.persist(detachedInstance);
+			session.merge(detachedInstance);
 			session.getTransaction().commit();
 			log.debug("merge successful");
 		} catch (RuntimeException re) {
@@ -74,13 +75,16 @@ public class PagamentoDAO {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
+			String hql = "from Pagamento";
+			Query query = session.createQuery(hql);
+			List<Pagamento> pagamentos = query.list();
 			session.getTransaction().commit();
-			log.debug("persist successful");
+			return pagamentos;
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
 			throw re;
 		}
-		return null;
+		
 	}
 	
 	public Pagamento findById(PagamentoId id) {

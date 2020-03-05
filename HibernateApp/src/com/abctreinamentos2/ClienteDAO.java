@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import com.abctreinamentos2.Cliente;
 
@@ -48,7 +49,7 @@ public class ClienteDAO {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
-			session.persist(persistentInstance);
+			session.delete(persistentInstance);
 			session.getTransaction().commit();
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
@@ -62,7 +63,7 @@ public class ClienteDAO {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
-			session.persist(detachedInstance);
+			session.merge(detachedInstance);
 			session.getTransaction().commit();
 			log.debug("merge successful");
 		} catch (RuntimeException re) {
@@ -76,13 +77,17 @@ public class ClienteDAO {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
+			String hql = "from Cliente";
+			Query query = session.createQuery(hql);
+			List<Cliente> clientes = query.list();
 			session.getTransaction().commit();
-			log.debug("persist successful");
+			return clientes;
+			
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
 			throw re;
 		}
-		return null;
+
 	}
 	
 	public Cliente findById(long cpf) {
